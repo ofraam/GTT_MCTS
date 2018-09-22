@@ -478,7 +478,7 @@ if __name__ == "__main__":
             c.DIMENSION = 10
             continue
         chosen_moves = {}
-        num_runs = 2
+        num_runs = 500
         num_correct = 0.0
         print filename
 
@@ -497,7 +497,7 @@ if __name__ == "__main__":
             n = 50
         n=100000
         prev_n = n
-        c.NODE_LIMIT = 10
+        c.NODE_LIMIT = 20000
         while ((success < c.SOLVED-c.SOLVED*0.05) & (n<=prev_n)):
 
         # while (success < 0):
