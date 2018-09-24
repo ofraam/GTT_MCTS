@@ -58,7 +58,7 @@ def _expand(state_node, current_path=[]):
     #     c.PATHS_DICT[str(current_path)][1] += 1
     # else:
     #     c.PATHS_DICT[str(current_path)] = [len(current_path), 1, convert_ab_board_to_matrix(state_node.state.board.board), str(pos[0])+'_'+str(pos[1])]
-    c.PATHS_DICT.append([str(current_path), convert_ab_board_to_matrix(state_node.state.board.board), str(pos[0])+'_'+str(pos[1]), 'simulation'])
+    # c.PATHS_DICT.append([str(current_path), convert_ab_board_to_matrix(state_node.state.board.board), str(pos[0])+'_'+str(pos[1]), 'simulation'])
     current_path.append(pos_move)
     return state_node.children[action].sample_state()
 
@@ -72,7 +72,7 @@ def _best_child(state_node, tree_policy, current_path=[]):
 
     # if str(current_path) in c.PATHS_DICT:
     #     c.PATHS_DICT[str(current_path)][1] += 1
-    c.PATHS_DICT.append([str(current_path), convert_ab_board_to_matrix(state_node.state.board.board), str(pos[0])+'_'+str(pos[1]), 'simulation'])
+    # c.PATHS_DICT.append([str(current_path), convert_ab_board_to_matrix(state_node.state.board.board), str(pos[0])+'_'+str(pos[1]), 'simulation'])
     current_path.append(pos_move)
     # else:
     #     c.PATHS_DICT[str(current_path)] = [len(current_path), 1, convert_ab_board_to_matrix(state_node.state.board.board), {str(pos[0]+'_'+pos[1]): 1}]

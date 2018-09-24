@@ -262,7 +262,7 @@ class MazeState(object):
 def parallel_mcts(max_workers, N=50):
     starttime = time()
     N_multi = int(N / max_workers)
-    temp_file_names = ["stats\\mcts\\"+"{0}TEMP.csv".format(i) for i in range(max_workers)]
+    temp_file_names = ["stats\\mcts\\"+"{0}TEMP_10boards".format(i) for i in range(max_workers)]
     params = [Params(num_runs=N_multi, csv_filename=name, ) for name in temp_file_names]
     param_list = params
     #param_list = [params]*max_workers
@@ -300,8 +300,8 @@ def run_mcts(params):
             file_path = "examples/board_6_4.txt"
             c.DIMENSION = 6
             # continue
-            if not(filename.startswith("6_easy")):
-                continue
+            # if not(filename.startswith("6_easy")):
+            #    continue
 
         else:
             # if filename.startswith("10by10_easy"):
@@ -330,7 +330,7 @@ def run_mcts(params):
             n = 50
         n=100000
         prev_n = n
-        c.NODE_LIMIT = 20000
+        c.NODE_LIMIT = 100000
         while ((success < c.SOLVED-c.SOLVED*0.05) & (n<=prev_n)):
 
         # while (success < 0):
@@ -389,17 +389,17 @@ def run_mcts(params):
             success = num_correct/num_runs
 
             results.extend(board_results)
-            dataFilePath = open(csv_filename+'_paths.csv', 'ab')
-            dataWriterPaths = csv.writer(dataFilePath, delimiter=',')
-            if write_header:
-                dataWriterPaths.writerow(['path', 'board_state','position', 'board', 'type'])
-                write_header = False
-            for p in c.PATHS_DICT:
+            # dataFilePath = open(csv_filename+'_paths.csv', 'ab')
+            # dataWriterPaths = csv.writer(dataFilePath, delimiter=',')
+            # if write_header:
+            #    dataWriterPaths.writerow(['path', 'board_state','position', 'board', 'type'])
+            #    write_header = False
+            # for p in c.PATHS_DICT:
                 # print p
-                p.append(str(filename[:-5]))
+                # p.append(str(filename[:-5]))
                 # print p
-                dataWriterPaths.writerow(p)
-            dataFilePath.close()
+                # dataWriterPaths.writerow(p)
+            # dataFilePath.close()
             c.PATHS_DICT = []
         print '----------'
         print n
@@ -421,7 +421,7 @@ def run_mcts(params):
         #     dataWriterPaths.writerow(p)
         # dataFilePath.close()
         # c.PATHS_DICT = []
-        dataFile = open(csv_filename+'stats.csv', 'ab')
+        dataFile = open(csv_filename+'_100000_stats230918.csv', 'ab')
         dataWriter = csv.DictWriter(dataFile, fieldnames=simulation_data.keys(), delimiter=',')
         if write_header:
             dataWriter.writeheader()
@@ -434,8 +434,8 @@ def run_mcts(params):
 
 
 if __name__ == "__main__":
-    # parallel_mcts(3, N=6)
-    # exit()
+    parallel_mcts(10, N=500)
+    exit()
     # mcts = MCTS(tree_policy=UCB1(c=1.41),
     #             default_policy=random_terminal_roll_out,
     #             # default_policy=randomk,
@@ -466,7 +466,7 @@ if __name__ == "__main__":
         if filename.startswith("6"):
             file_path = "examples/board_6_4.txt"
             c.DIMENSION = 6
-            # continue
+            continue
             if not(filename.startswith("6_easy")):
                 continue
 
@@ -476,7 +476,7 @@ if __name__ == "__main__":
             #   continue
             file_path = "examples/board_10_5.txt"
             c.DIMENSION = 10
-            continue
+            # continue
         chosen_moves = {}
         num_runs = 500
         num_correct = 0.0

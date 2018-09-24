@@ -68,7 +68,7 @@ def _roll_out(state_node, stopping_criterion, current_path=[]):
         pos = convert_position_to_row_col(action, c.DIMENSION)
         pos_move = [pos[0], pos[1], state.player]
         current_path.append(pos_move)
-        c.PATHS_DICT.append([str(current_path), convert_ab_board_to_matrix(state.board.board), str(pos[0])+'_'+str(pos[1]), 'rollout'])
+        # c.PATHS_DICT.append([str(current_path), convert_ab_board_to_matrix(state.board.board), str(pos[0])+'_'+str(pos[1]), 'rollout'])
         state = parent.perform(action)
 
     reward += state.reward(parent, action)
